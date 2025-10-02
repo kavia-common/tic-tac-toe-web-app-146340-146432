@@ -3,15 +3,15 @@
     let { children } = $props();
 </script>
 
-<main>
+<main class="shell">
     {@render children()}
 </main>
 
 <style>
-    main {
-        display: flex;
-        min-height: 100vh;
-        align-items: center;
-        justify-content: center;
+    .shell {
+        min-height: 100svh;
+        display: grid;
+        place-items: center;
+        padding: 2rem 1rem;
     }
 </style>

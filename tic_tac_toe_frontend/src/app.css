@@ -1,14 +1,56 @@
 :root {
-    --color-background: #FFFFFF;
-    --color-text-primary: #333333;
-    --color-text-secondary: #666666;
-    --color-accent: #FF8C42;
-    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    /* Ocean Professional Theme */
+    --op-primary: #2563EB;   /* Primary blue */
+    --op-secondary: #F59E0B; /* Amber accent for success/secondary */
+    --op-success: #F59E0B;
+    --op-error: #EF4444;
+    --op-bg: #f9fafb;        /* Background */
+    --op-surface: #ffffff;   /* Card surface */
+    --op-surface-border: #e5e7eb;
+    --op-text: #111827;
+    --op-text-muted: #6b7280;
+    --op-ring: #93c5fd;      /* Light ring for focus/hover */
+    --op-grid: #e5e7eb;
+
+    /* Typography */
+    --op-font: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji", sans-serif;
+
+    /* Sizing */
+    --container-max: 560px;
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+html, body, #svelte {
+    height: 100%;
 }
 
 body {
     margin: 0;
     min-height: 100vh;
-    background-color: var(--color-background);
-    color: var(--color-text-primary);
+    color: var(--op-text);
+    background:
+        radial-gradient(1200px 600px at 10% -20%, rgba(37,99,235,0.10), transparent 60%),
+        radial-gradient(1000px 500px at 120% 10%, rgba(99,102,241,0.08), transparent 55%),
+        var(--op-bg);
+    font-family: var(--op-font);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+:focus-visible {
+    outline: 2px solid var(--op-ring);
+    outline-offset: 2px;
+    border-radius: 8px;
+}
+
+/* Utility classes (optional) */
+.hidden { display: none !important; }
+.center {
+    display: grid;
+    place-items: center;
 }
