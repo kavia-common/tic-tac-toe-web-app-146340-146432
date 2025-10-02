@@ -17,6 +17,13 @@
 
     type Cell = 'X' | 'O' | '';
 
+    // Map the players to chess piece icons (Unicode)
+    // Knight (horse) for X, Queen for O.
+    const ICONS: Record<'X' | 'O', string> = {
+        X: '♞', // black knight
+        O: '♛', // black queen
+    };
+
     // PUBLIC_INTERFACE
     export function createEmptyBoard(): Cell[] {
         /** Create a new empty tic tac toe board with 9 cells. */
@@ -140,7 +147,14 @@
             {#if !gameOver}
                 <div class="turn">
                     <span class="label">Current:</span>
-                    <span class="badge {currentPlayer === 'X' ? 'x' : 'o'}" in:scale>{currentPlayer}</span>
+                    <span
+                        class="badge {currentPlayer === 'X' ? 'x' : 'o'}"
+                        in:scale
+                        aria-label={currentPlayer === 'X' ? 'Current player: Knight' : 'Current player: Queen'}
+                        title={currentPlayer === 'X' ? 'Knight' : 'Queen'}
+                    >
+                        {currentPlayer === 'X' ? ICONS.X : ICONS.O}
+                    </span>
                 </div>
             {/if}
         </section>
@@ -157,7 +171,14 @@
                     in:scale={{ duration: 100 }}
                 >
                     {#if cell}
-                        <span class="mark {cell}" in:scale={{ duration: 120 }}>{cell}</span>
+                        <span
+                            class="mark {cell}"
+                            in:scale={{ duration: 120 }}
+                            aria-label={cell === 'X' ? 'Knight' : 'Queen'}
+                            title={cell === 'X' ? 'Knight' : 'Queen'}
+                        >
+                            {cell === 'X' ? ICONS.X : ICONS.O}
+                        </span>
                     {/if}
                 </button>
             {/each}
@@ -254,6 +275,10 @@
         color: var(--op-text-muted);
     }
 
+    .turn .label {
+        font-size: 0.95rem;
+    }
+
     .badge {
         display: inline-flex;
         align-items: center;
@@ -265,6 +290,8 @@
         color: white;
         letter-spacing: 0.5px;
         text-shadow: 0 1px 0 rgba(0,0,0,0.08);
+        line-height: 1;
+        font-size: 1.1rem; /* ensure chess icon is visually balanced */
     }
 
     .badge.x {
@@ -341,14 +368,17 @@
         text-shadow: 0 1px 0 rgba(255,255,255,0.35);
     }
 
+    /* Themed chess pieces replacing X and O */
     .mark.X {
         color: var(--op-primary);
         filter: drop-shadow(0 6px 10px rgba(37,99,235,0.35));
+        font-weight: 600; /* slightly lighter to suit the Unicode glyph */
     }
 
     .mark.O {
         color: var(--op-secondary);
         filter: drop-shadow(0 6px 10px rgba(245,158,11,0.35));
+        font-weight: 600;
     }
 
     /* Footer */
